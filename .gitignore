@@ -1,1 +1,3 @@
-Server/.idea/
+/Server/.idea/
+/web/node_modules
+/web/dist

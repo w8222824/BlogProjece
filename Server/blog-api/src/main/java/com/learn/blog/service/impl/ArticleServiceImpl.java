@@ -43,7 +43,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     /**
-     * 分页查询 article数据库表
+     * 分页查询 文章列表
      *
      * */
     @Override
@@ -62,6 +62,16 @@ public class ArticleServiceImpl implements ArticleService {
         return Result.success(articleVoList);
     }
 
+
+    /**
+     * @param records :文章list集合
+     * @param isTag   ：是否要有标签
+     * @param isAuthor:是否要有作者
+     *
+     *
+     *
+     *
+     * */
     private List<ArticleVo> copyList(List<Article> records,boolean isTag,boolean isAuthor) {
         List<ArticleVo> articleVoList = new ArrayList<>();
         for (Article record : records) {

@@ -29,8 +29,8 @@ public class ArticleController {
 
         //ArticleVo 页面接收的数据
 //        List<ArticleVo> articles = articleService.listArticlesPage(pageParams);
-        log.info("数据校验2：{}",pageParams);
-        log.info("数据校验3:{}",articleService.listArticle(pageParams));
+//        log.info("数据校验2：{}",pageParams);
+//        log.info("数据校验3:{}",articleService.listArticle(pageParams));
         return articleService.listArticle(pageParams);
     }
 

@@ -26,9 +26,8 @@ public class ArticleController {
      * */
     @PostMapping
     public Result listArticle(@RequestBody PageParams pageParams){
-        log.info("数据校验2：{}",pageParams);
 
-        int i=10/0;
+
         //ArticleVo 页面接收的数据
 //        List<ArticleVo> articles = articleService.listArticlesPage(pageParams);
 //        log.info("数据校验2：{}",pageParams);
@@ -53,16 +52,16 @@ public class ArticleController {
 //        return articleService.listArticle(pageParams);
 //    }
 //
-//    /**
-//     * 首页 最热文章
-//     * @return
-//     */
-//    @PostMapping("hot")
+    /**
+     * 首页 最热文章
+     * @return
+     */
+    @PostMapping("hot")
 //    @Cache(expire = 5 * 60 * 1000,name = "hot_article")
-//    public Result hotArticle(){
-//        int limit = 5;
-//        return articleService.hotArticle(limit);
-//    }
+    public Result hotArticle(){
+        int limit = 5;  //定义取前几条
+        return articleService.hotArticle(limit);
+    }
 //
 //    /**
 //     * 首页 最新文章

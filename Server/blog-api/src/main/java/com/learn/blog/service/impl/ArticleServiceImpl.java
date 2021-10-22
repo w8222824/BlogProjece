@@ -62,6 +62,25 @@ public class ArticleServiceImpl implements ArticleService {
         return Result.success(articleVoList);
     }
 
+    /**
+     *
+     * 最热文章
+     * @param limit  显示几条最热文章
+     *
+     * */
+    @Override
+    public Result hotArticle(int limit) {
+
+        LambdaQueryWrapper<Article> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(Article::getViewCounts);        //对文章的浏览量进行倒序派
+        queryWrapper.select(Article::getId,Article::getTitle);   //只要id和标题
+        queryWrapper.last("limit "+limit);    //拼接到sql语句最后
+        //上面的接口函数等价的sql语句:select id,title from article order by view_counts desc limit 5
+        List<Article> articles= articleMapper.selectList(queryWrapper);
+
+        return Result.success(copyList(articles,false,false));
+    }
+
 
     /**
      * @param records :文章list集合
@@ -83,9 +102,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     public ArticleVo copy(Article article,boolean isTag,boolean isAuthor){
         ArticleVo articleVo = new ArticleVo();
-        BeanUtils.copyProperties(article, articleVo);   //相同属性copy
+        BeanUtils.copyProperties(article, articleVo);   //相同属性copy  参数1是源对象  参数2是目标对象
 
-        articleVo.setCreateDate(new DateTime(article.getCreateDate()).toString("yyyy-MM-dd HH:mm"));
+        articleVo.setCreateDate(new DateTime(article.getCreateDate()).toString("yyyy-MM-dd HH:mm")); //如果没有传时间会默认取当前时间
 
         //并不是所有的文章都需要标签和作者
         if (isTag){

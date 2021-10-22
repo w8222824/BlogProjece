@@ -17,6 +17,10 @@ public class Article {
 
     private Integer commentCounts;
 
+    /**
+     * 浏览量
+     *
+     * */
     private Integer viewCounts;
 
     /**

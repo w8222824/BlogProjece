@@ -62,26 +62,26 @@ public class ArticleController {
         int limit = 5;  //定义取前几条
         return articleService.hotArticle(limit);
     }
-//
-//    /**
-//     * 首页 最新文章
-//     * @return
-//     */
-//    @PostMapping("new")
+
+    /**
+     * 首页 最新文章
+     * @return
+     */
+    @PostMapping("new")
 //    @Cache(expire = 5 * 60 * 1000,name = "news_article")
-//    public Result newArticles(){
-//        int limit = 5;
-//        return articleService.newArticles(limit);
-//    }
-//
-//    /**
-//     * 首页 最新文章
-//     * @return
-//     */
-//    @PostMapping("listArchives")
-//    public Result listArchives(){
-//        return articleService.listArchives();
-//    }
+    public Result newArticles(){
+        int limit = 5;
+        return articleService.newArticles(limit);
+    }
+
+    /**
+     * 首页 归档文章
+     * @return
+     */
+    @PostMapping("listArchives")
+    public Result listArchives(){
+        return articleService.listArchives();
+    }
 //
 //
 //    @PostMapping("view/{id}")

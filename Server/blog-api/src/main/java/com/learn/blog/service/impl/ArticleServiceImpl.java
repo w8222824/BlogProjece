@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import com.learn.blog.dao.dos.Archives;
 import com.learn.blog.dao.mapper.ArticleMapper;
 
 import com.learn.blog.dao.pojo.Article;
@@ -79,6 +80,41 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> articles= articleMapper.selectList(queryWrapper);
 
         return Result.success(copyList(articles,false,false));
+    }
+
+
+
+
+    /**
+     *
+     * 最新文章
+     * @param limit  显示几条最新文章
+     *
+     * */
+    @Override
+    public Result newArticles(int limit) {
+
+        LambdaQueryWrapper<Article> queryWrapper=new LambdaQueryWrapper<>();
+        queryWrapper.orderByDesc(Article::getCreateDate);        //根据文章的创建时间进行排序
+        queryWrapper.select(Article::getId,Article::getTitle);   //只要id和标题
+        queryWrapper.last("limit "+limit);    //拼接到sql语句最后
+        //上面的接口函数等价的sql语句:select id,title from article order by create_date desc limit 5
+        List<Article> articles= articleMapper.selectList(queryWrapper);
+
+        return Result.success(copyList(articles,false,false));
+    }
+
+
+    /**
+     * 文件归档 没有专门的归档的数据表 根据sql语句从多表里面拿取拼接
+     *  从文章表 ms_article里面查询 把别名了年和月 然后count(*)  在by year month 实现了 统计相关的逻辑
+     * select year(create_date) as year,month(create_date) as month,count(*) as count  from ms_article group by year,month
+     * select year(FROM_UNIXTIME(create_date/1000)) year,month(FROM_UNIXTIME(create_date/1000)) month, count(*) count from ms_article group by year,month
+     * */
+    @Override
+    public Result listArchives() {
+       List<Archives> archivesList=   articleMapper.listArchives();
+        return Result.success(archivesList);
     }
 
 

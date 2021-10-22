@@ -16,24 +16,24 @@ public interface ArticleService {
 
     /**
      * 最热文章
-     * @param limit
+     * @param limit  几条
      * @return
      */
     Result hotArticle(int limit);
-//
-//    /**
-//     * 最新文章
-//     * @param limit
-//     * @return
-//     */
-//    Result newArticles(int limit);
-//
-//    /**
-//     * 文章归档
-//     * @return
-//     */
-//    Result listArchives();
-//
+
+    /**
+     * 最新文章
+     * @param limit   几条
+     * @return
+     */
+    Result newArticles(int limit);
+
+    /**
+     * 文章归档
+     * @return
+     */
+    Result listArchives();
+
 //    /**
 //     * 查看文章详情
 //     * @param articleId

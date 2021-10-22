@@ -26,7 +26,9 @@ public class ArticleController {
      * */
     @PostMapping
     public Result listArticle(@RequestBody PageParams pageParams){
+        log.info("数据校验2：{}",pageParams);
 
+        int i=10/0;
         //ArticleVo 页面接收的数据
 //        List<ArticleVo> articles = articleService.listArticlesPage(pageParams);
 //        log.info("数据校验2：{}",pageParams);

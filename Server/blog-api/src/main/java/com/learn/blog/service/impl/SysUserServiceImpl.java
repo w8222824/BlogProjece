@@ -47,16 +47,16 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUser;
     }
 
-//    @Override
-//    public SysUser findUser(String account, String password) {
-//        LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
-//        queryWrapper.eq(SysUser::getAccount,account);
-//        queryWrapper.eq(SysUser::getPassword,password);
-//        queryWrapper.select(SysUser::getAccount,SysUser::getId,SysUser::getAvatar,SysUser::getNickname);
-//        queryWrapper.last("limit 1");
-//
-//        return sysUserMapper.selectOne(queryWrapper);
-//    }
+    @Override
+    public SysUser findUser(String account, String password) {
+        LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysUser::getAccount,account);
+        queryWrapper.eq(SysUser::getPassword,password);
+        queryWrapper.select(SysUser::getAccount,SysUser::getId,SysUser::getAvatar,SysUser::getNickname);
+        queryWrapper.last("limit 1");   //查询到一个终止
+
+        return sysUserMapper.selectOne(queryWrapper);
+    }
 //
 //    @Override
 //    public Result findUserByToken(String token) {

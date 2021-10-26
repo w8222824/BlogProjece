@@ -13,8 +13,11 @@ public interface SysUserService {
 //    UserVo findUserVoById(Long id);
 
     SysUser findUserById(Long id);
-
-//    SysUser findUser(String account, String password);
+    /**
+     * 查询用户信息
+     * password:这个密码是被加密过后的
+     * */
+    SysUser findUser(String account, String password);
 //
 //    /**
 //     * 根据token查询用户信息

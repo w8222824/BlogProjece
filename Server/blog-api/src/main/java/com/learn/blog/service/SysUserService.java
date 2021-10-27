@@ -18,13 +18,13 @@ public interface SysUserService {
      * password:这个密码是被加密过后的
      * */
     SysUser findUser(String account, String password);
-//
-//    /**
-//     * 根据token查询用户信息
-//     * @param token
-//     * @return
-//     */
-//    Result findUserByToken(String token);
+
+    /**
+     * 根据token查询用户信息
+     * @param token
+     * @return
+     */
+    Result findUserByToken(String token);
 //
 //    /**
 //     * 根据账户查找用户

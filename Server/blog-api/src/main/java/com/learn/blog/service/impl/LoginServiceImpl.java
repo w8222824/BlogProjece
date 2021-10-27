@@ -14,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.learn.blog.utils.JWTUtils;
 import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -27,6 +29,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private RedisTemplate<String,String>  redisTemplate;
+
 
 
 
@@ -54,4 +57,37 @@ public class LoginServiceImpl implements LoginService {
 
         return Result.success(token);
     }
+
+    @Override
+    public Result logout(String token) {
+
+        redisTemplate.delete("Token_"+token);
+        return Result.success(null);
+    }
+
+    @Override
+    public SysUser checkToken(String token) {
+        if (StringUtils.isBlank(token))
+        {
+            return  null;
+        }
+        Map<String,Object> stringObjectMap=JWTUtils.checkToken(token);
+        if (stringObjectMap==null)
+        {
+            return  null;
+        }
+       String userJson= redisTemplate.opsForValue().get("Token_"+token);
+        if (StringUtils.isBlank(userJson)){
+            return  null;  //过期了也返回null
+        }
+
+        SysUser sysUser=JSON.parseObject(userJson,SysUser.class);  //json转成json对象
+
+        return sysUser;
+    }
+
+
+
+
+
 }
